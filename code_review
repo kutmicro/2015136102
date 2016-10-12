@@ -1,0 +1,67 @@
+// bluetooth - arduino
+#include <SoftwareSerial.h>
+ 
+SoftwareSerial mySerial(2, 3); // RX, TX
+ 
+void setup()  
+{
+  // Open serial communications and wait for port to open:
+  Serial.begin(9600);
+  Serial.println("Goodnight moon!");
+ 
+  // set the data rate for the SoftwareSerial port
+  mySerial.begin(9600);
+}
+ 
+void loop() // run over and over
+{
+  // Receive from bluetooth and send it to PC
+  if (mySerial.available())
+    Serial.write(mySerial.read());
+ 
+  // Receive from PC and send it to bluetooth
+  if (Serial.available())
+    mySerial.write(Serial.read());
+}
+
+// temperature - arduino
+ #include <SHT1x.h>
+ #define dataPin 10
+ #define clockPin 11
+ SHT1x  sht1x(dataPin, clockPin);
+ 
+ void setup(){
+      pinMode(5, OUTPUT);
+      pinMode(6, OUTPUT);
+      pinMode(7, OUTPUT);
+      Serial.begin(9600);
+ }
+ 
+ void loop(){
+      float tempC = sht1x.readTemperatureC();
+      Serial.print(tempC);
+      Serial.print("  C |  ");
+ 
+      float humidity = sht1x.readHumidity();
+      Serial.print(humidity);
+      Serial.println("  %  ");
+ 
+      if (tempC < 30) {
+         digitalWrite(7, HIGH);
+         delay(300);
+         digitalWrite(7, LOW);
+         delay(10);
+      }
+      if (tempC >= 30 && tempC < 50) {
+         digitalWrite(6, HIGH);
+         delay(300);
+         digitalWrite(6, LOW);
+         delay(10);
+      }
+      if (tempC >= 50) {
+         digitalWrite(5, HIGH);
+         delay(300);
+         digitalWrite(5, LOW);
+         delay(10);
+      }
+ }

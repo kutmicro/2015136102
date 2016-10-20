@@ -1,0 +1,43 @@
+// bluetooth module
+
+#include <SoftwareSerial.h>
+
+SoftwareSerial mySerial(2, 3);
+
+void setup() {
+  Serial.begin(9600);
+  Serial.println("Goodnight moon!");
+
+  mySerial.begin(9600);
+}
+
+void loop() {
+  if(mySerial.available())
+    Serial.write(mySerial.read());
+
+   if(Serial.available())
+    mySerial.write(Serial.read());
+}
+
+// temperature sensor
+
+#include <math.h>
+int a;
+float temperature;
+int B=3975;                  //B value of the thermistor
+float resistance;
+
+void setup()
+{
+  Serial.begin(9600);  
+}
+
+void loop()
+{
+  a=analogRead(0);
+  resistance=(float)(1023-a)*10000/a; //get the resistance of the sensor;
+  temperature=1/(log(resistance/10000)/B+1/298.15)-273.15;//convert to temperature via datasheet ;
+  delay(1000);
+  Serial.print("Current temperature is ");
+  Serial.println(temperature);
+ }

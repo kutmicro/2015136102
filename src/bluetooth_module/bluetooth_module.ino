@@ -1,18 +1,20 @@
-#include <SoftwareSerial.h>
-
-SoftwareSerial HM10(2,3); // RX, TX
-
 void setup() {
-  //기본 통신속도는 9600입니다.
+  //define 2 serial port
   Serial.begin(9600);
-  HM10.begin(9600);
+  Serial1.begin(9600); 
+
 }
 
 void loop() {
-  if (HM10.available()) {
-    Serial.write(HM10.read());
-  }
+  char c;
+  //the IDE send,phone receive
   if (Serial.available()) {
-    HM10.write(Serial.read());
+    c = Serial.read();
+     Serial1.print(c);
+  }
+  //the phone send ,IDE receive
+  if (Serial1.available()) {
+    c = Serial1.read();
+    Serial.print(c);
   }
 }

@@ -2,7 +2,6 @@ void setup() {
   //define 2 serial port
   Serial.begin(9600);
   Serial1.begin(9600); 
-
 }
 
 void loop() {
@@ -18,4 +17,3 @@ void loop() {
     Serial.print(c);
   }
 }
-

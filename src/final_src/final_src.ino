@@ -30,29 +30,39 @@ void loop() {
   Serial1.println(" humidity");
   Serial1.println(humi);
     
-  if(temp<28)
+  if(temp<=26)
   {
     digitalWrite(3, HIGH);
+    digitalWrite(4, LOW);
+    digitalWrite(5, LOW);
+    digitalWrite(6, LOW);
+    digitalWrite(7, LOW);
+  }
+  if(temp>=27)
+  {
+    digitalWrite(3, HIGH);
+    digitalWrite(4, HIGH);
+    digitalWrite(5, LOW);
+    digitalWrite(6, LOW);
+    digitalWrite(7, LOW);
+  }
+  if(temp>=28)
+  {  
+    digitalWrite(3, HIGH);
+    digitalWrite(4, HIGH);
+    digitalWrite(5, HIGH);
+    digitalWrite(6, LOW);
+    digitalWrite(7, LOW);
   }
   if(temp>=29)
   {
     digitalWrite(3, HIGH);
     digitalWrite(4, HIGH);
-  }
-  if(temp>=30)
-  {  
-    digitalWrite(3, HIGH);
-    digitalWrite(4, HIGH);
-    digitalWrite(5, HIGH);
-  }
-  if(temp>=31)
-  {
-    digitalWrite(3, HIGH);
-    digitalWrite(4, HIGH);
     digitalWrite(5, HIGH);
     digitalWrite(6, HIGH);
+    digitalWrite(7, LOW);
   }
-  if(temp>=32)
+  if(temp>=30)
   {
     digitalWrite(3, HIGH);
     digitalWrite(4, HIGH);
